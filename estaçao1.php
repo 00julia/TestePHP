@@ -7,59 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-$dia = ;
-$mes = 12;
-
-switch($mes){
-    case 1:
-    case 2:
-    case 3:
-        if($mes == 3 and $dia >= 20){
-            echo "<p>Outono</p>";
-            echo "<outono.png'>";
-        } else{
-            echo "<p>Verão</p>";
-            echo "<verao.png'>";
-        }
-        break;
-    case 4:
-    case 5:
-    case 6:
-        if($mes == 6 and $dia >= 21){
-            echo "<p>Inverno</p>";
-            echo "<inverno.png'>";
-        }else{
-            echo "<p>Outono</p>";
-            echo "<outono.png'>";
-        }
-        break;
-    case 7:
-    case 8:
-    case 9:
-        if($mes == 9 and $dia >= 23){
-            echo "<p>Primavera</p>";
-            echo "<primavera.png'>";
-        } else {
-            echo "<p>Inverno</p>";
-            echo "<inverno.png'>";
-        }
-        break;
-    case 10:
-    case 11:
-    case 12:
-        if($mes == 12 and $dia >= 22){
-            echo "<p>Verão</p>";
-            echo "<verao.png'>";
-        } else {
-            echo "<p>Primavera</p>";
-            echo "<primavera.png'>";
-        }
-        break;
-    default:
-        echo "<p>Mês " .$mes. " incorreto!</p>";
+<?php
+function getSeason($month, $day) {
+    if (($month == 3 && $day >= 20) || ($month > 3 && $month < 6) || ($month == 6 && $day < 21)) {
+        return 'Primavera';
+    } elseif (($month == 6 && $day >= 21) || ($month > 6 && $month < 9) || ($month == 9 && $day < 23)) {
+        return 'Verão';
+    } elseif (($month == 9 && $day >= 23) || ($month > 9 && $month < 12) || ($month == 12 && $day < 21)) {
+        return 'Outono';
+    } else {
+        return 'Inverno';
+    }
 }
 
-    ?>
+// Obtém a data atual
+$currentDate = new DateTime();
+$month = $currentDate->format('n');
+$day = $currentDate->format('j');
+
+// Determina a estação do ano
+$season = getSeason($month, $day);
+
+// Exibe a estação do ano
+echo 'Estamos na estação: ' . $season;
+?>
 </body>
 </html>
